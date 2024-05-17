@@ -1,0 +1,27 @@
+#!/bin/sh
+  
+# 1.) Copy this file into the folder where you are working (analysis directory)
+# 2.) Change the variables below according to your file nomenclature
+# 3.) Make sure your temp directory folder exists (mkdir /scratch4/mgomes7/tmp)
+# 4.) add full path in single quotes below don't use relative path use the full path (pwd -P in tmp to see true path) 
+export TMPDIR='/scratch4/mgomes7/tmp'
+
+# output file names from the emp_paired_end_script_rc.csh will have this prefix 
+PREFIX=emp-paired-end-sequences
+
+# fastq sequencing files are linked to fastq files in emp-paired-end-sequences directory
+# [jdodd7@c006 emp-paired-end-sequences]$ ln ../../../swilber4_195474/Undetermined_S0_L001_I1_001.fastq.gz barcodes.fastq.gz
+# [jdodd7@c006 emp-paired-end-sequences]$ ln ../../../swilber4_195474/Undetermined_S0_L001_R1_001.fastq.gz forward.fastq.gz
+# [jdodd7@c006 emp-paired-end-sequences]$ ln ../../../swilber4_195474/Undetermined_S0_L001_R2_001.fastq.gz reverse.fastq.gz
+# These are the linked fastq files in the emp-paired-end-sequences directory
+# barcodes.fastq.gz
+# forward.fastq.gz
+# reverse.fastq.gz
+# this is the directory with three zipped files the script will use as import data 
+DATA=emp-paired-end-sequences
+
+# name of metadata file
+# Keimee checked, and qiime2 validated with google sheets
+METADATA=sample-metadata.tsv
+
+echo "variables imported"

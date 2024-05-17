@@ -1,0 +1,38 @@
+#!/bin/sh
+  
+# 1.) Copy this in the folder where you will do the analysis
+# 2.) Update the variables below according to your file names
+
+# confirm variables are correct 
+# make sure this folder exists
+# mkdir /scratch4/mgomes7/tmp
+# add full path in single quotes below 
+# has to be the full path (maybe with pwd -P to see true path). Don't use relative path
+export TMPDIR='/scratch4/mgomes7/tmp'
+
+#Define the table and reps, either single run DADA2 output, or merged table
+TABLE=emp-paired-end-sequences_dada2_filtered_table.qza
+REPS=emp-paired-end-sequences_reps.qza
+
+# look at the sequencing depth of the samples
+# choose the most appropriate depth
+# cither the lowest count sample or 5000 (minimum) which ever is higher
+# find the coverage with the qiime feature-table summarize
+DEPTH=112650
+
+# define prefix for core diversity metrics
+CORE=core-metrics
+
+# name of Keimee checked, qiime2 validated mapping metadata file
+METADATA=sample-metadata.tsv
+
+# output file name prefix for everything from the moving pictures script but diversity core metrics
+PREFIX=emp_paired_MPA
+
+# get the current classifier
+# if it exists in this folder, comment out the next line
+# otherwise, this will download and then set the variable to the name
+wget http://data.qiime2.org/2023.5/common/gg-13-8-99-515-806-nb-classifier.qza
+CLASSI=gg-13-8-99-515-806-nb-classifier.qza
+
+echo "Variables imported"
