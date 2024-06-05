@@ -12,26 +12,26 @@
 
 module load qiime2/2023.5.1
 
-#copy emp_paired_end_script.config.txt to analysis folder
-#edit variables of config file according to analysis
-#save them and this script will use those variables in this analysis
+# copy emp_paired_end_script.config.txt to analysis folder
+# edit variables of config file according to analysis
+# this script will use the variables in the config file for this analysis
 source ./emp_paired_end_script.config
 
-#echo the time for each
+# echo the time for each - this helps with troubleshooting bugs
 echo "Starting qiime2 analysis"
 date
 
-#import the demultiplexed data 
+# import the demultiplexed data 
 echo "Starting qiime2 tools import"
 date
 
-# inputing fastq files from emp-paired-end-sequences directory
+# importing fastq files from emp-paired-end-sequences directory
 qiime tools import \
  --type EMPPairedEndSequences \
  --input-path $DATA \
  --output-path ${PREFIX}.qza
 
-#demultiplexing data
+# demultiplex sequence data
 echo "Starting demux"
 date
 qiime demux emp-paired \
@@ -43,13 +43,14 @@ qiime demux emp-paired \
  --o-error-correction-details ${PREFIX}_demux-details.qza \
  --p-no-golay-error-correction 
 
+# make a summary of the demultiplexed sequences
 echo "Starting demux summary"
 date
 qiime demux summarize \
  --i-data ${PREFIX}_demux.qza \
  --o-visualization ${PREFIX}_demux.qzv
 
-#use dada2 to remove sequencing errors
+# use DADA2 to remove sequencing errors
 echo "Starting DADA2"
 date
 qiime dada2 denoise-paired \
@@ -64,6 +65,7 @@ qiime dada2 denoise-paired \
  --p-n-threads 2 \
  --p-min-fold-parent-over-abundance 10
 
+# filter samples for this study 
 echo "Starting filter"
 date
 qiime feature-table filter-samples \
@@ -72,6 +74,7 @@ qiime feature-table filter-samples \
  --p-where "[SampleOwner]='Lizzy'" \
  --o-filtered-table ${PREFIX}_dada2_filtered_table.qza
 
+# make a feature table summary with the filtered samples for this study
 echo "Starting feature table summary"
 date
 qiime feature-table summarize \
