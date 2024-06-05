@@ -10,6 +10,7 @@
 #SBATCH --mail-type=end 
 #SBATCH --mail-user=jdodd7@jhu.edu
 
+#load qiime module
 module load qiime2/2023.5.1
 
 # copy emp_paired_end_script.config.txt to analysis folder
