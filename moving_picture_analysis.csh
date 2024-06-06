@@ -10,19 +10,20 @@
 #SBATCH --mail-user=jdodd7@jhu.edu
 
 
-#load qiime module
+# load qiime module
 module load qiime2/2023.5.1
 
 # edit variables of config file according to analysis
 # this script will use the variables in the config file for this analysis
+# get proper classifier reminder - in config file
 source ./moving_picture_analysis.config
 
-#get proper classifier
 
-#echo the time for each
+# echo the time for each - this will help with debugging
 echo "Starting moving picture tutorial analysis"
 date
 
+# sequence alignment and phylogenetic tree 
 echo "Starting alignment and tree"
 date
 
@@ -33,7 +34,7 @@ qiime phylogeny align-to-tree-mafft-fasttree \
   --o-tree ${PREFIX}_unrooted-tree.qza \
   --o-rooted-tree ${PREFIX}_rooted-tree.qza
 
-#alpha diversity:
+# alpha diversity:
 echo "Starting alpha diversity"
 date
 
@@ -44,7 +45,7 @@ qiime diversity core-metrics-phylogenetic \
   --m-metadata-file ${METADATA} \
   --output-dir ${PREFIX}_core-metrics-results
 
-#group significance
+# group significance
 echo "Starting alpha diversity significance"
 date
 
@@ -58,6 +59,7 @@ qiime diversity alpha-group-significance \
   --m-metadata-file ${METADATA} \
   --o-visualization ${PREFIX}_core-metrics-results/evenness-group-significance.qzv
 
+# beta diveristy
 echo "Beta diversity"
 date
 qiime emperor plot \
@@ -70,7 +72,7 @@ qiime emperor plot \
   --m-metadata-file ${METADATA} \
   --o-visualization ${PREFIX}_core-metrics-results/bray-curtis-emperor-days.qzv
 
-#alpha
+# alpha rarefaction
 echo "Alpha rarefaction"
 date
 
@@ -81,7 +83,7 @@ qiime diversity alpha-rarefaction \
   --m-metadata-file ${METADATA} \
   --o-visualization ${PREFIX}_alpha-rarefaction.qzv
 
-#taxonomy
+# taxonomy
 echo "Starting taxonomic analysis"
 date
 
