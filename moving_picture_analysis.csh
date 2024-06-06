@@ -13,6 +13,8 @@
 #load qiime module
 module load qiime2/2023.5.1
 
+# edit variables of config file according to analysis
+# this script will use the variables in the config file for this analysis
 source ./moving_picture_analysis.config
 
 #get proper classifier
