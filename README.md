@@ -1,6 +1,8 @@
 # Project Description
 The files in this repository were used for the analysis of the V4 region of the 16S rRNA gene using paired-end sequencing data on the QIIME2 platform.
 
+[![DOI](https://zenodo.org/badge/802160410.svg)](https://zenodo.org/doi/10.5281/zenodo.11659018)
+
 # Project Details 
 The original files for this project were downloaded from [github user spacocha's PreheimLab_16S_SOPs repository](https://github.com/spacocha/PreheimLab_16S_SOPs) and modified. The modified files are uploaded to this repository. 
 
